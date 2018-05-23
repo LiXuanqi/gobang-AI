@@ -1,5 +1,5 @@
 import Board from './board';
-import Chess from './chess';
+
 import { interval } from './config';
 class Game {
     constructor() {
@@ -15,25 +15,31 @@ class Game {
         canvas.onclick = (e)=>{
             const x = Math.round(e.offsetY / interval);
             const y = Math.round(e.offsetX / interval);
-            this.nextRound(x, y);
-            
+            this.step(x, y);
+      
         };
     }
-    nextRound(x, y) {
+    end() {
+        this._inProcess = false;
+    }
+    step(x, y) {
         if (this._inProcess) {
-            let chess = null;
-            if (this._isBlack) {
-                chess = new Chess(x, y, "black");          
+            if (this._isBlack) {     
+                this._board.step(x, y, "black");     
             } else {
-                chess = new Chess(x, y, "white");
+                this._board.step(x, y, "white");  
             }
-            chess.draw();
-            this.isWin();
-            this._isBlack = !this._isBlack;
+            if(this.isWin(x,y)){
+                alert((this._isBlack ? "black" : "white") + ' win');
+                this.end();
+            } else {
+                this._isBlack = !this._isBlack;
+            }
+       
         }
     }
-    isWin() {
-        return this._board.isWin();
+    isWin(x,y) {
+        return this._board.isWin(x,y);
     }
 }
 

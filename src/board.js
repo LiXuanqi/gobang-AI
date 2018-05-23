@@ -1,26 +1,129 @@
 import { edgeLength, interval, lineWidth, lineColor} from './config';
+import Chess from './chess';
 class Board {
     constructor() {    
         // init board data.
         this.n = edgeLength / interval;
         const board = initEmtpyBoard(this.n);
         this._data = [...board];
-        // init counter
-        const emptyCounter = initEmptyCounter(this.n);
-        this._rowCounters = [...emptyCounter];
-        this._colCounters = [...emptyCounter];
-        this._diagCounters = [...emptyCounter];
-        this._inverseDiagCounters = [...emptyCounter];
+
     }
     // Getter
     get data() {
         return this._data;
     }
     // Method
-    isWin() {
-        console.log('who wins?')
+    step(x, y, color) {
+        let chess = null;
+        if (color === "black") {
+            chess = new Chess(x, y, "black");   
+            this._data[x][y] = 1;  
+        } else {
+            chess = new Chess(x, y, "white");   
+            this._data[x][y] = 2;  
+        }
+        chess.draw();    
+    }
+    isWin(x, y) {
+        if (this._checkRow(x,y)) {
+            return true;
+        }
+        if (this._checkCol(x,y)) {
+            return true;
+        }
+        if (this._checkDiag(x,y)) {
+            return true;
+        }
+        if (this._checkInverseDiag(x,y)) {
+            return true;
+        }
+        return false;
+    }
+    _checkInverseDiag(x, y) {
+        const board = this._data;
+        const color = board[x][y];
+        let count = 1;
+        const initX = x;
+        const initY = y;
+        while (board[x + 1][y - 1] === color) {
+            count++;
+            x++;
+            y--;
+        }
+        x = initX;
+        y = initY;
+        while (board[x - 1][y + 1] === color) {
+            count++;
+            x--;
+            y++;
+        }
+        if (count >= 5) {
+            return true;
+        }
+        return false;
+    }
+    _checkDiag(x,y) {
+        const board = this._data;
+        const color = board[x][y];
+        let count = 1;
+        const initX = x;
+        const initY = y;
+        while (board[x + 1][y + 1] === color) {
+            count++;
+            x++;
+            y++;
+        }
+        x = initX;
+        y = initY;
+        while (board[x - 1][y - 1] === color) {
+            count++;
+            x--;
+            y--;
+        }
+        if (count >= 5) {
+            return true;
+        }
+        return false;
+    }
+    _checkCol(x, y) {
+        const board = this._data;
+        const color = board[x][y];
+        let count = 1;
+        const initX = x;
+        while (board[x + 1][y] === color) {
+            count++;
+            x++;
+        }
+        x = initX;
+        while (board[x - 1][y] === color) {
+            count++;
+            x--;
+        }
+        if (count >= 5) {
+            return true;
+        }
+        return false;
     }
 
+    _checkRow(x, y) {
+        const board = this._data;
+        const color = board[x][y];
+        let count = 1;
+        const initY = y;
+        while (board[x][y + 1] === color) {
+            count++;
+            y++;
+        }
+        y = initY;
+        while (board[x][y - 1] === color) {
+            count++;
+            y--;
+        }
+        if (count >= 5) {
+            return true;
+        }
+        return false;
+    }
     draw() {
         context.beginPath();
         for (var i = 0; i <= this.n; i++) {
@@ -49,14 +152,6 @@ const initEmtpyBoard = (n) => {
         }
     }
     return board;
-}
-
-const initEmptyCounter = (n) => {
-    let emptyCounter = [];
-    for (let i = 0; i <= n; i++) {
-       emptyCounter[i] = 0;
-    }
-    return emptyCounter;
 }
 
 export default Board;

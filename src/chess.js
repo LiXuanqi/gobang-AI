@@ -16,8 +16,8 @@ class Chess {
         context.strokeStyle="black";
         context.stroke();
         context.closePath();
-  
     }
+    
 }
 
 export default Chess;
