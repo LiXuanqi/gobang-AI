@@ -2,18 +2,22 @@
   "name": "gobang-ai",
   "version": "1.0.0",
   "description": "Gobang Game with AI",
-  "main": "index.js",
+  "private": true,
   "dependencies": {
     "babel-cli": "^6.26.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d lib"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",

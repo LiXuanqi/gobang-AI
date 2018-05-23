@@ -13,29 +13,7 @@ canvas.height = edgeLength;
 // global params
 var isPlaying = false
 var me = false
-class Board {
-    constructor() {    
-        var n = edgeLength / interval;
-        // init board data.
-        for (var i = 0; i <= n; i++) {
-            board[i] = [];
-            for (var j = 0; j <= n; j++) {
-                board[i][j] = 0;
-            }
-        }
-        this.data = board;
-        // init counter
-        var emptyCounter = [];
-        for (var i = 0; i <= n; i++) {
-           emptyCounter[i] = 0;
-        }
-      
-        this.rowCounters = emptyCounter;
-        this.colCounters = emptyCounter;
-        this.diagCounters = emptyCounter;
-        this.inverseDiagCounters = emptyCounter;
-    }
-}
+
 
 drawBoard();
 
