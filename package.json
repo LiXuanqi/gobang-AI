@@ -1,0 +1,28 @@
+{
+  "name": "gobang-ai",
+  "version": "1.0.0",
+  "description": "Gobang Game with AI",
+  "main": "index.js",
+  "dependencies": {
+    "babel-cli": "^6.26.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiXuanqi/gobang-AI.git"
+  },
+  "author": "lixuanqi (lixuanqi1995@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiXuanqi/gobang-AI/issues"
+  },
+  "homepage": "https://github.com/LiXuanqi/gobang-AI#readme"
+}
