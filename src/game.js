@@ -1,6 +1,7 @@
 import Board from './board';
 import { findBestNextStep } from './ai';
 import { interval } from './config';
+import AI from './ai';
 class Game {
     constructor() {
         // black chess - first.
@@ -8,6 +9,7 @@ class Game {
         this._inProcess = false;
         this._board = new Board();
         this._board.draw();
+        this._AI = new AI();
     }
     begin() {
         this._isBlack = true;
@@ -25,7 +27,7 @@ class Game {
     }
     oneRound(x, y) {
         this.step(x, y);
-        findBestNextStep(x,y, this._board.data);
+        this._AI.findBestNextStep(x, y, this._board.data);
         // this.step();
         
     }
