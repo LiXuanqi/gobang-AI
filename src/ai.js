@@ -20,58 +20,55 @@ class AI {
             }
         }
         console.log(this.scores);
+        let max = Number.NEGATIVE_INFINITY;
+        let nextStep = null;
+        for (let u = 0; u < 15; u++) {
+            for (let v = 0; v < 15; v++) {
+                if (this.scores[u][v] > max) {
+                    max = this.scores[u][v];
+                    nextStep = new Coordinate(u, v);
+                }
+            }
+        }
+        // Should recaculate the whole scores matrix ?
+        this.scores = initEmtpyBoard(this._n);
+        return nextStep;
     }
     _evaluate(line) {
-        // 1 => AI 
+        // 1 => AI - black
         // 0 => empty 
-        // 2 => human 
-        if (line.indexOf("11111") !== -1) {
-            return 50000;
+        // 2 => human - white
+
+        const number0 = (line.split('0')).length - 1;
+        const number1 = (line.split('1')).length - 1;
+        const number2 = (line.split('2')).length - 1;
+
+        if (number0 === 5) {
+            return 7;
         }
-        if (line === "011110") {
-            return 4320;
+        if (number1 === 1 && number2 === 0) {
+            return 35;
         }
-        if (line === "011100") {
-            return 720;
+        if (number1 === 2 && number2 === 0) {
+            return 800
         }
-        if (line === "001110") {
-            return 720;
+        if (number1 === 3 && number2 === 0) {
+            return 15000;
         }
-        if (line === "011010") {
-            return 720;
+        if (number1 === 4 && number2 === 0) {
+            return 800000;
         }
-        if (line === "010110") {
-            return 720;
+        if (number1 === 0 && number2 === 1) {
+            return 15;
         }
-        if (line.indexOf("11110") !== -1) {
-            return 720;
+        if (number1 === 0 && number2 === 2) {
+            return 400;
         }
-        if (line.indexOf("01111") !== -1) {
-            return 720;
+        if (number1 === 0 && number2 === 3) {
+            return 1800;
         }
-        if (line.indexOf("11011") !== -1) {
-            return 720;
-        }
-        if (line.indexOf("10111") !== -1) {
-            return 720;
-        }
-        if (line.indexOf("11101") !== -1) {
-            return 720;
-        }
-        if (line === "001100") {
-            return 120;
-        }
-        if (line === "001010") {
-            return 120;
-        }
-        if (line === "010100") {
-            return 120;
-        }
-        if (line === "000100") {
-            return 20;
-        }
-        if (line === "001000") {
-            return 20;
+        if (number1 === 0 && number2 === 4) {
+            return 100000;
         }
         return 0;
     }
@@ -84,30 +81,30 @@ class AI {
         // board[x][y] board[x][y+1] ... board[x][y+5]
         // board[x][y-1] board[x][y] ... board[x][y+3]
         // board[x][y-5] ...             board[x] [y]
-        for (let i = -5; i < 1; i++) {
-            if (this._inBound(x, y + i) && this._inBound(x, y+i+5)) {
-                let line = "" + board[x][y+i] + board[x][y+i+1] + board[x][y+i+2] + board[x][y+i+3] + board[x][y+i+4]+ board[x][y+i+5];
+        for (let i = -4; i < 1; i++) {
+            if (this._inBound(x, y + i) && this._inBound(x, y+i+4)) {
+                let line = "" + board[x][y+i] + board[x][y+i+1] + board[x][y+i+2] + board[x][y+i+3] + board[x][y+i+4];
                 allLines.push(line);
             }
         }
         // 45
-        for (let k = -5; k < 1; k++) {
-            if (this._inBound(x+k, y-k) && this._inBound(x+k+5, y-k-5)) {
-                let line = "" + board[x+k][y-k] + board[x+k+1][y-k-1] + board[x+k+2][y-k-2] + board[x+k+3][y-k-3] + board[x+k+4][y-k-4] + board[x+k+5][y-k-5];
+        for (let k = -4; k < 1; k++) {
+            if (this._inBound(x+k, y-k) && this._inBound(x+k+4, y-k-4)) {
+                let line = "" + board[x+k][y-k] + board[x+k+1][y-k-1] + board[x+k+2][y-k-2] + board[x+k+3][y-k-3] + board[x+k+4][y-k-4];
                 allLines.push(line);
             }
         }
         // 90
-        for (let l = -5; l < 1; l++) {
-            if (this._inBound(x+l, y) && this._inBound(x+l+5, y)) {
-                let line = "" + board[x+l][y] + board[x+l+1][y] + board[x+l+2][y] + board[x+l+3][y] + board[x+l+4][y] + board[x+l+5][y];
+        for (let l = -4; l < 1; l++) {
+            if (this._inBound(x+l, y) && this._inBound(x+l+4, y)) {
+                let line = "" + board[x+l][y] + board[x+l+1][y] + board[x+l+2][y] + board[x+l+3][y] + board[x+l+4][y];
                 allLines.push(line);
             }
         }
         // 135
-        for (let j = -5; j < 1; j++) {
-            if (this._inBound(x+j, y+j) && this._inBound(x+j+5, y+j+5)) {
-                let line = "" + board[x+j][y+j] + board[x+j+1][y+j+1] + board[x+j+2][y+j+2] + board[x+j+3][y+j+3] + board[x+j+4][y+j+4] + board[x+j+5][y+j+5];
+        for (let j = -4; j < 1; j++) {
+            if (this._inBound(x+j, y+j) && this._inBound(x+j+4, y+j+4)) {
+                let line = "" + board[x+j][y+j] + board[x+j+1][y+j+1] + board[x+j+2][y+j+2] + board[x+j+3][y+j+3] + board[x+j+4][y+j+4];
                 allLines.push(line);
             }
         }
@@ -148,5 +145,7 @@ const initEmtpyBoard = (n) => {
     }
     return board;
 }
+
+
 
 export default AI;
