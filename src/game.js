@@ -22,8 +22,9 @@ class Game {
     end() {
         this._inProcess = false;
     }
+
     step(x, y) {
-        if (this._inProcess) {
+        if (this._inProcess && this._board.isEmpty(x, y)) {
             if (this._isBlack) {     
                 this._board.step(x, y, "black");     
             } else {
@@ -35,7 +36,6 @@ class Game {
             } else {
                 this._isBlack = !this._isBlack;
             }
-       
         }
     }
     isWin(x,y) {

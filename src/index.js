@@ -8,5 +8,10 @@ canvas.width = 800;
 canvas.height = 800;
 
 let game = new Game();
-game.begin();
+
+$("#play").click(() => {
+    game.begin();
+});
+
+
 

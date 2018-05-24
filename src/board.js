@@ -14,15 +14,22 @@ class Board {
     }
     // Method
     step(x, y, color) {
-        let chess = null;
-        if (color === "black") {
-            chess = new Chess(x, y, "black");   
-            this._data[x][y] = 1;  
+            let chess = null;
+            if (color === "black") {
+                chess = new Chess(x, y, "black");   
+                this._data[x][y] = 1;  
+            } else {
+                chess = new Chess(x, y, "white");   
+                this._data[x][y] = 2;  
+            }
+            chess.draw();   
+    }
+    isEmpty(x, y) {
+        if (this._data[x][y] === 0) {
+            return true;
         } else {
-            chess = new Chess(x, y, "white");   
-            this._data[x][y] = 2;  
+            return false;
         }
-        chess.draw();    
     }
     isWin(x, y) {
         if (this._checkRow(x,y)) {
@@ -39,20 +46,23 @@ class Board {
         }
         return false;
     }
+    _inBound(x, y) {
+        return 0 <= x && x <= this.n && 0<= y && y <= this.n;
+    }
     _checkInverseDiag(x, y) {
         const board = this._data;
         const color = board[x][y];
         let count = 1;
         const initX = x;
         const initY = y;
-        while (board[x + 1][y - 1] === color) {
+        while (this._inBound(x + 1, y - 1) && board[x + 1][y - 1] === color) {
             count++;
             x++;
             y--;
         }
         x = initX;
         y = initY;
-        while (board[x - 1][y + 1] === color) {
+        while (this._inBound(x - 1, y + 1) && board[x - 1][y + 1] === color) {
             count++;
             x--;
             y++;
@@ -68,14 +78,14 @@ class Board {
         let count = 1;
         const initX = x;
         const initY = y;
-        while (board[x + 1][y + 1] === color) {
+        while (this._inBound(x + 1, y + 1) && board[x + 1][y + 1] === color) {
             count++;
             x++;
             y++;
         }
         x = initX;
         y = initY;
-        while (board[x - 1][y - 1] === color) {
+        while (this._inBound(x - 1, y - 1) && board[x - 1][y - 1] === color) {
             count++;
             x--;
             y--;
@@ -90,12 +100,12 @@ class Board {
         const color = board[x][y];
         let count = 1;
         const initX = x;
-        while (board[x + 1][y] === color) {
+        while (this._inBound(x + 1, y) && board[x + 1][y] === color) {
             count++;
             x++;
         }
         x = initX;
-        while (board[x - 1][y] === color) {
+        while (this._inBound(x - 1, y) && board[x - 1][y] === color) {
             count++;
             x--;
         }
@@ -110,12 +120,12 @@ class Board {
         const color = board[x][y];
         let count = 1;
         const initY = y;
-        while (board[x][y + 1] === color) {
+        while (this._inBound(x, y + 1) && board[x][y + 1] === color) {
             count++;
             y++;
         }
         y = initY;
-        while (board[x][y - 1] === color) {
+        while (this._inBound(x, y - 1) && board[x][y - 1] === color) {
             count++;
             y--;
         }
