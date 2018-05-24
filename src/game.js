@@ -1,5 +1,5 @@
 import Board from './board';
-
+import { findBestNextStep } from './ai';
 import { interval } from './config';
 class Game {
     constructor() {
@@ -15,14 +15,20 @@ class Game {
         canvas.onclick = (e)=>{
             const x = Math.round(e.offsetY / interval);
             const y = Math.round(e.offsetX / interval);
-            this.step(x, y);
+
+            this.oneRound(x, y);
       
         };
     }
     end() {
         this._inProcess = false;
     }
-
+    oneRound(x, y) {
+        this.step(x, y);
+        findBestNextStep(x,y, this._board.data);
+        // this.step();
+        
+    }
     step(x, y) {
         if (this._inProcess && this._board.isEmpty(x, y)) {
             if (this._isBlack) {     
