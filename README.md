@@ -4,7 +4,7 @@ This is a gobang game with primary AI. You can play with computer.
 
 Draw graphics with Canvas API and implement AI with [minimax algorithm](https://en.wikipedia.org/wiki/Minimax) and [Alpha–beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning).
 
-Have fun and Enjoy it!
+Have fun and Enjoy it! 😝
 
 ![Screenshot](https://github.com/LiXuanqi/gobang-AI/blob/master/screenshots/1.jpg)
 
