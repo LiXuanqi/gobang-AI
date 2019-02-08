@@ -1,7 +1,9 @@
 # Gobang-AI
-![Screenshot](https://github.com/LiXuanqi/gobang-AI/blob/master/screenshots/1.jpg)
-This is a gobang game with primary AI. You can play with computer, Have fun and Enjoy it.
 
+This is a gobang game with primary AI. You can play with computer, Have fun and Enjoy it.
+Draw graphics with Canvas API and implement AI with [minimax algorithm](https://en.wikipedia.org/wiki/Minimax) and [Alpha–beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)
+
+![Screenshot](https://github.com/LiXuanqi/gobang-AI/blob/master/screenshots/1.jpg)
 
 ## [Live Demo](http://gobang.lixuanqi.me/)
 
