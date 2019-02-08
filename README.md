@@ -1,7 +1,6 @@
 # Gobang-AI
-
+![Screenshot](https://github.com/LiXuanqi/gobang-AI/blob/master/screenshots/1.jpg)
 This is a gobang game with primary AI. You can play with computer, Have fun and Enjoy it.
-
 
 
 ## [Live Demo](http://gobang.lixuanqi.me/)
